@@ -5,8 +5,8 @@
 **Server URL:** [https://b11a10-findnest-server.vercel.app/](https://b11a10-findnest-server.vercel.app/)
 
 ## GitHub Repositories
-- Client: [https://github.com/Programming-Hero-Web-Course4/b11a10-client-side-arif128551](https://github.com/Programming-Hero-Web-Course4/b11a10-client-side-arif128551)
-- Server: [https://github.com/Programming-Hero-Web-Course4/b11a10-server-side-arif128551](https://github.com/Programming-Hero-Web-Course4/b11a10-server-side-arif128551)
+- **Client:** [FindNest Client](https://github.com/arif128551/findnest_client)
+- **Server:** [FindNest Server](https://github.com/arif128551/findnest_serverside)
 
 ---
 
