@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --font-sans: "Poppins", sans-serif;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: #ffffff;
+  --color-base-200: #dae9ff;
+  --color-base-300: #7398f6;
+  --color-base-content: #5a6473;
+
+  --color-primary: #0f1b4c;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #063183;
+  --color-secondary-content: #3182ce;
+
+  --color-accent: #ffc947;
+  --color-accent-content: #000000;
+
+  --color-neutral: #4b5563;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #f9f9f9;
+  --color-success: #4ade80;
+  --color-warning: #facc15;
+  --color-error: #dc2626;
+
+
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  color-scheme: dark;
+
+  --color-base-100: #0f172a;
+  --color-base-200: #1e293b;
+  --color-base-300: #334155;
+  --color-base-content: #e5e5e5;
+
+  --color-primary: #93c5fd;
+  --color-primary-content: #0f172a;
+
+  --color-secondary: #60a5fa;
+  --color-secondary-content: #2b6cb0;
+
+  --color-accent: #fcd34d;
+  --color-accent-content: #1e1e1e;
+
+  --color-neutral: #64748b;
+  --color-neutral-content: #e2e8f0;
+
+  --color-info: #2a2a2a;
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+
+.homeSwiper .swiper-pagination-bullet {
+  background-color: var(--color-primary);
+}
+
+.homeSwiper .swiper-pagination-bullet-active {
+  width: 32px;
+  border-radius: 80px;
+}
+
+.homeSwiper .swiper-pagination {
+  margin-top: 1rem;
+  bottom: 30px !important;
+}
+
+.menu-horizontal .active,
+.menu-horizontal a:hover {
+  color: var(--color-secondary-content);
+}
