@@ -10,6 +10,15 @@ import MyListings from "../pages/MyListings/MyListings";
 import AddFindRoommate from "../pages/AddFindRoommate/AddFindRoommate";
 import PrivateRoute from "./PrivateRoute";
 import PageLoader from "../components/ui/PageLoader";
+import Contact from "../pages/Contact/Contact";
+import PrivacyPolicy from "../pages/info/PrivacyPolicy";
+import AboutUs from "../pages/info/AboutUs";
+import Careers from "../pages/info/Careers";
+import Community from "../pages/info/Community";
+import FAQs from "../pages/info/FAQs";
+import HelpCenter from "../pages/info/HelpCenter";
+import ReportProblem from "../pages/info/ReportProblem";
+import TermsConditions from "../pages/info/TermsConditions";
 
 export const router = createBrowserRouter([
 	{
@@ -54,6 +63,42 @@ export const router = createBrowserRouter([
 						<AddFindRoommate></AddFindRoommate>
 					</PrivateRoute>
 				),
+			},
+			{
+				path: "/contact",
+				Component: Contact,
+			},
+			{
+				path: "/about-us",
+				Component: AboutUs,
+			},
+			{
+				path: "/privacy-policy",
+				Component: PrivacyPolicy,
+			},
+			{
+				path: "/careers",
+				Component: Careers,
+			},
+			{
+				path: "/community",
+				Component: Community,
+			},
+			{
+				path: "/faq",
+				Component: FAQs,
+			},
+			{
+				path: "/help-center",
+				Component: HelpCenter,
+			},
+			{
+				path: "/report-problem",
+				Component: ReportProblem,
+			},
+			{
+				path: "/terms-conditions",
+				Component: TermsConditions,
 			},
 			{
 				path: "/login",
