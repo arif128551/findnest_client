@@ -162,18 +162,14 @@ const DashboardMyListings = () => {
 		try {
 			const token = await user.getIdToken();
 
-			const response = await axios.put(
-				`https://b11a10-findnest-server.vercel.app/api/my-roommates/${updateItem._id}`,
-				updatedData,
-				{
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
+			const response = await axios.put(`${import.meta.env.VITE_apiUrl}/my-roommates/${updateItem._id}`, updatedData, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			});
 
-			const result = await response.json();
+			const result = response.data;
 
 			if (result.modifiedCount > 0) {
 				toast.success("Listing updated successfully.");
