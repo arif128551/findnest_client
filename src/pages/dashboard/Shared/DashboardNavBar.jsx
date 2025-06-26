@@ -11,14 +11,14 @@ const DashboardNavBar = () => {
 		signOutUser()
 			.then(() => {
 				navigate("/");
-				toast.success("You’re now logged out. See you again soon");
+				toast.success("You’re now logged out. See you again soon!");
 			})
 			.catch((error) => {
 				toast(error);
 			});
 	};
 	return (
-		<div className="navbar bg-primary shadow-sm px-4">
+		<div className="navbar bg-primary shadow-sm px-4 sticky top-0">
 			<div className="flex-1 navbar-start">
 				<div className="dropdown md:hidden">
 					<div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -76,7 +76,9 @@ const DashboardNavBar = () => {
 							<a>Settings</a>
 						</li>
 						<li>
-							<button onClick={handleLogout}>Logout</button>
+							<button className="cursor-pointer" onClick={handleLogout}>
+								Logout
+							</button>
 						</li>
 					</ul>
 				</div>
