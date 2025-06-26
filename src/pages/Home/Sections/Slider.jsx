@@ -7,6 +7,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import slide1Img from "../../../assets/slider/slide-one.png";
 import slide2Img from "../../../assets/slider/slide-two.png";
 import slide3Img from "../../../assets/slider/slide-three.png";
+import { Link } from "react-router";
 const Slider = () => {
 	const slides = [
 		{
@@ -45,9 +46,12 @@ const Slider = () => {
 										{slide.heading}
 									</h2>
 									<p className="text-base-content text-lg leading-relaxed mb-8">{slide.text}</p>
-									<button className="bg-primary text-white px-6 py-3 rounded-xl font-medium hover:bg-secondary transition">
+									<Link
+										to="/about-us"
+										className="bg-primary text-white px-6 py-3 rounded-xl font-medium hover:bg-secondary transition"
+									>
 										More About Us
-									</button>
+									</Link>
 								</div>
 								<div className="flex-shrink-0">
 									<img src={slide.image} alt={slide.heading} className="max-w-[480px] w-full rounded-xl" />
