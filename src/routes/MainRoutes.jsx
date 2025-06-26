@@ -21,6 +21,9 @@ import ReportProblem from "../pages/info/ReportProblem";
 import TermsConditions from "../pages/info/TermsConditions";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/dashboard/Dashboard/Dashboard";
+import AllListings from "../pages/dashboard/AllListings/AllListings";
+import AddListing from "../pages/dashboard/AddListing/AddListing";
+import DashboardMyListings from "../pages/dashboard/MyListings/DashboardMyListings";
 
 export const router = createBrowserRouter([
 	{
@@ -125,6 +128,32 @@ export const router = createBrowserRouter([
 				element: (
 					<PrivateRoute>
 						<Dashboard></Dashboard>
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "/dashboard/all-listings",
+				element: (
+					<PrivateRoute>
+						<AllListings></AllListings>
+					</PrivateRoute>
+				),
+				loader: () => fetch("https://b11a10-findnest-server.vercel.app/api/roommates/"),
+				hydrateFallbackElement: <PageLoader />,
+			},
+			{
+				path: "/dashboard/add-listing",
+				element: (
+					<PrivateRoute>
+						<AddListing></AddListing>
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "/dashboard/my-listings",
+				element: (
+					<PrivateRoute>
+						<DashboardMyListings></DashboardMyListings>
 					</PrivateRoute>
 				),
 			},

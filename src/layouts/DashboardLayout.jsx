@@ -10,7 +10,7 @@ const DashboardLayout = () => {
 			<DashboardNavBar></DashboardNavBar>
 			<div className="flex">
 				<DashboardSidebar></DashboardSidebar>
-				<div className="p-5">
+				<div className="p-5 flex-auto">
 					<Outlet></Outlet>
 				</div>
 			</div>

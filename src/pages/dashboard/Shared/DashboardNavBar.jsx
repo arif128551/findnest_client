@@ -18,7 +18,7 @@ const DashboardNavBar = () => {
 			});
 	};
 	return (
-		<div className="navbar bg-primary shadow-sm px-4 sticky top-0">
+		<div className="navbar bg-gray-900 shadow-sm px-4 sticky top-0 z-10">
 			<div className="flex-1 navbar-start">
 				<div className="dropdown md:hidden">
 					<div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -56,7 +56,7 @@ const DashboardNavBar = () => {
 				<div className="dropdown dropdown-end">
 					<div className="flex gap-2 items-center">
 						<div className="hidden sm:flex">
-							<h2 className="text-white">Howdy, {user.displayName}</h2>
+							<h2 className="text-white">{user.displayName}</h2>
 						</div>
 						<div tabIndex={0} role="button" className="btn-circle w-10 h-10 avatar bg-white">
 							<div className="rounded-full">
@@ -70,10 +70,7 @@ const DashboardNavBar = () => {
 					</div>
 					<ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
 						<li>
-							<a>Profile</a>
-						</li>
-						<li>
-							<a>Settings</a>
+							<Link to="/">Visit Site</Link>
 						</li>
 						<li>
 							<button className="cursor-pointer" onClick={handleLogout}>

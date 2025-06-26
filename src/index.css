@@ -87,3 +87,18 @@ body {
 .menu-horizontal a:hover {
   color: var(--color-secondary-content);
 }
+
+
+
+.dashboard-desktop-menu a {
+  padding: 10px 16px;
+}
+
+.dashboard-desktop-menu a:hover {
+  color: white;
+}
+
+.dashboard-desktop-menu a.active {
+  color: white;
+  background-color: #3182ce;
+}
