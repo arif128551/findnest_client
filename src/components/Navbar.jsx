@@ -95,25 +95,27 @@ const Navbar = ({ setTheme, theme }) => {
 					<ThemeToggle setTheme={setTheme} theme={theme} />
 					{user ? (
 						<>
-							<div className="mr-1 relative group  hidden sm:block">
-								{user.photoURL ? (
-									<img
-										src={user.photoURL}
-										alt="Profile photo"
-										data-tooltip-id="user-tooltip"
-										className="w-10 h-10 rounded-full object-cover  cursor-pointer"
-									/>
-								) : (
-									<PiUserCircleFill
-										size={41}
-										className="cursor-pointer user-full-name"
-										data-tooltip-id="user-tooltip"
-									/>
-								)}
-								<Tooltip id="user-tooltip" place="bottom">
-									{user.displayName}
-								</Tooltip>
-							</div>
+							<Link to="/dashboard">
+								<div className="mr-1 relative group  hidden sm:block">
+									{user.photoURL ? (
+										<img
+											src={user.photoURL}
+											alt="Profile photo"
+											data-tooltip-id="user-tooltip"
+											className="w-10 h-10 rounded-full object-cover  cursor-pointer"
+										/>
+									) : (
+										<PiUserCircleFill
+											size={41}
+											className="cursor-pointer user-full-name"
+											data-tooltip-id="user-tooltip"
+										/>
+									)}
+									<Tooltip id="user-tooltip" place="bottom">
+										{user.displayName}
+									</Tooltip>
+								</div>
+							</Link>
 							<button
 								onClick={handleLogout}
 								className="text-xs sm:text-sm transition text-white bg-primary hover:text-white font-semibold py-2.5 px-5 rounded-lg cursor-pointer  hidden sm:block hover:bg-base-300"

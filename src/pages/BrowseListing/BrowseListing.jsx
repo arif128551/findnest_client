@@ -18,34 +18,11 @@ const BrowseListing = () => {
 					from the database. Click the “Eye” button on any row to view full details of a listing.
 				</p>
 			</div>
-			<div className="overflow-x-auto bg-base-200/20 rounded-md">
-				<table className="table text-primary">
-					<thead className="text-primary">
-						<tr>
-							<th>No. </th>
-							<th>Title</th>
-							<th className="hidden sm:table-cell">Rent</th>
-							<th className="hidden md:table-cell">Room Type</th>
-							<th className="hidden lg:table-cell">Availability</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						{browseListings.map((listing, index) => (
-							<BrowseListingCard key={listing._id} index={index} listing={listing} />
-						))}
-					</tbody>
-					<tfoot>
-						<tr className="text-primary">
-							<th>No. </th>
-							<th>Title</th>
-							<th className="hidden sm:table-cell">Rent</th>
-							<th className="hidden md:table-cell">Room Type</th>
-							<th className="hidden lg:table-cell">Availability</th>
-							<th>Action</th>
-						</tr>
-					</tfoot>
-				</table>
+
+			<div className="grid grid-cols-1 md:grid-cols-2  gap-4 lg:gap-7">
+				{browseListings.map((listing) => (
+					<BrowseListingCard key={listing._id} listing={listing}></BrowseListingCard>
+				))}
 			</div>
 		</div>
 	);

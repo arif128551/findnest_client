@@ -19,6 +19,8 @@ import FAQs from "../pages/info/FAQs";
 import HelpCenter from "../pages/info/HelpCenter";
 import ReportProblem from "../pages/info/ReportProblem";
 import TermsConditions from "../pages/info/TermsConditions";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Dashboard from "../pages/dashboard/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
 	{
@@ -107,6 +109,24 @@ export const router = createBrowserRouter([
 			{
 				path: "/signup",
 				Component: Register,
+			},
+		],
+	},
+	{
+		path: "/dashboard",
+		element: (
+			<PrivateRoute>
+				<DashboardLayout />
+			</PrivateRoute>
+		),
+		children: [
+			{
+				index: true,
+				element: (
+					<PrivateRoute>
+						<Dashboard></Dashboard>
+					</PrivateRoute>
+				),
 			},
 		],
 	},
