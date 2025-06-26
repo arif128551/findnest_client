@@ -164,7 +164,6 @@ const DashboardMyListings = () => {
 
 			const response = await axios.put(`${import.meta.env.VITE_apiUrl}/my-roommates/${updateItem._id}`, updatedData, {
 				headers: {
-					"Content-Type": "application/json",
 					Authorization: `Bearer ${token}`,
 				},
 			});
