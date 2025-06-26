@@ -11,7 +11,7 @@ const DashboardNavBar = () => {
 		signOutUser()
 			.then(() => {
 				navigate("/");
-				toast.success("You’re now logged out. See you again soon!");
+				toast.success("You’re now logged out. See you again soon");
 			})
 			.catch((error) => {
 				toast(error);
