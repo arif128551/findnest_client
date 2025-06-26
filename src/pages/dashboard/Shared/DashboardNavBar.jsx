@@ -1,7 +1,22 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { use } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { PiUserCircleFill } from "react-icons/pi";
+import toast from "react-hot-toast";
 
 const DashboardNavBar = () => {
+	const { user, signOutUser } = use(AuthContext);
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		signOutUser()
+			.then(() => {
+				navigate("/");
+				toast.success("You’re now logged out. See you again soon!");
+			})
+			.catch((error) => {
+				toast(error);
+			});
+	};
 	return (
 		<div className="navbar bg-primary shadow-sm px-4">
 			<div className="flex-1 navbar-start">
@@ -31,20 +46,26 @@ const DashboardNavBar = () => {
 					</ul>
 				</div>
 				<div className="navbar-start">
-					<div tabIndex={0} className="text-white cursor-pointer">
-						FindNest Dashboard
+					<div tabIndex={0} className="text-white cursor-pointer ml-1 md:ml-0">
+						<span className="hidden sm:inline-block">FindNest</span> Dashboard
 					</div>
 				</div>
 			</div>
 
 			<div className="flex-none">
 				<div className="dropdown dropdown-end">
-					<div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-						<div className="w-10 rounded-full">
-							<img
-								alt="Tailwind CSS Navbar component"
-								src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-							/>
+					<div className="flex gap-2 items-center">
+						<div className="hidden sm:flex">
+							<h2 className="text-white">Howdy, {user.displayName}</h2>
+						</div>
+						<div tabIndex={0} role="button" className="btn-circle w-10 h-10 avatar bg-white">
+							<div className="rounded-full">
+								{user.photoURL ? (
+									<img src={user.photoURL} alt="Profile photo" className="w-10 h-10 rounded-full cursor-pointer" />
+								) : (
+									<PiUserCircleFill size={41} className="cursor-pointer user-full-name" />
+								)}
+							</div>
 						</div>
 					</div>
 					<ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
@@ -55,7 +76,7 @@ const DashboardNavBar = () => {
 							<a>Settings</a>
 						</li>
 						<li>
-							<a>Logout</a>
+							<button onClick={handleLogout}>Logout</button>
 						</li>
 					</ul>
 				</div>
