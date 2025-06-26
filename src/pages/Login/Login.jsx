@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import toast from "react-hot-toast";
 import loginImg from "../../assets/login-findnest.jpg";
+import axios from "axios";
 const Login = () => {
 	const { signInUserWithEmailPass, googleSignIn, setLoading } = use(AuthContext);
 	const location = useLocation();
@@ -27,22 +28,31 @@ const Login = () => {
 			})
 			.finally(() => setLoading(false));
 	};
-	const handleGoogleBtnLogin = () => {
-		googleSignIn()
-			.then((result) => {
-				const user = result.user;
-				const { creationTime, lastSignInTime } = user.metadata;
-				if (creationTime === lastSignInTime) {
-					toast.success("Account created successfully with Google! You're now logged in.");
-				} else {
-					toast.success("Welcome back! You've logged in with Google.");
-				}
-				navigate(location.state || "/");
-			})
-			.catch((error) => {
-				const errorMessage = error.message;
-				toast.error(errorMessage);
+	const handleGoogleBtnLogin = async () => {
+		try {
+			const result = await googleSignIn();
+			const user = result.user;
+			const { creationTime, lastSignInTime } = user.metadata;
+
+			const response = await axios.post(`${import.meta.env.VITE_apiUrl}/users`, {
+				email: user.email,
+				displayName: user.displayName,
+				photoURL: user.photoURL,
+				creationTime,
+				lastSignInTime,
 			});
+
+			const data = response.data;
+
+			if (data.status === "new") {
+				toast.success("Account created successfully with Google!");
+			} else {
+				toast.success("Welcome back! You've logged in with Google.");
+			}
+			navigate("/");
+		} catch (error) {
+			toast.error(error.message || "Google login failed.");
+		}
 	};
 
 	useEffect(() => {

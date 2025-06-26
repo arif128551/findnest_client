@@ -1,11 +1,13 @@
-import React from "react";
+import React, { use } from "react";
 import logoLight from "../assets/logo.png";
 import logoDark from "../assets/logo-dark.png";
 import { Link, NavLink } from "react-router";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn, FaFacebookF } from "react-icons/fa";
 import CTASection from "./CTASection";
+import { AuthContext } from "../contexts/auth/AuthContext";
 const Footer = ({ theme }) => {
+	const { user } = use(AuthContext);
 	return (
 		<>
 			<CTASection></CTASection>
@@ -16,33 +18,35 @@ const Footer = ({ theme }) => {
 							<h3 className="text-primary font-semibold text-xl mb-5 lg:mb-10">Services</h3>
 							<ul className="space-y-4 text-primary/60">
 								<li>
-									<NavLink>Roommate Finder</NavLink>
+									<NavLink to="/">Home</NavLink>
 								</li>
 								<li>
-									<NavLink>Browse Listing</NavLink>
+									<NavLink to="/browse-listing">Browse Listings</NavLink>
 								</li>
 								<li>
-									<NavLink>Add Listing</NavLink>
+									<NavLink to="/contact">Contact Us</NavLink>
 								</li>
-								<li>
-									<NavLink>Saved Items</NavLink>
-								</li>
+								{user && (
+									<li>
+										<NavLink to="/dashboard">Dashboard</NavLink>
+									</li>
+								)}
 							</ul>
 						</div>
 						<div>
 							<h3 className="text-primary font-semibold text-xl mb-5 lg:mb-10">Resources</h3>
 							<ul className="space-y-4 text-primary/60">
 								<li>
-									<NavLink to="/terms-conditions">Help Center</NavLink>
+									<NavLink to="/help-center">Help Center</NavLink>
 								</li>
 								<li>
-									<NavLink to="/privacy-policy">Report a Problem</NavLink>
+									<NavLink to="/report-problem">Report a Problem</NavLink>
 								</li>
 								<li>
-									<NavLink to="/404">Community Blog</NavLink>
+									<NavLink to="/community">Community</NavLink>
 								</li>
 								<li>
-									<NavLink to="/404">FAQs</NavLink>
+									<NavLink to="/faq">FAQs</NavLink>
 								</li>
 							</ul>
 						</div>
@@ -50,16 +54,16 @@ const Footer = ({ theme }) => {
 							<h3 className="text-primary font-semibold text-xl mb-5 lg:mb-10">Company</h3>
 							<ul className="space-y-4 text-primary/60">
 								<li>
-									<NavLink to="/terms-conditions">About Us</NavLink>
+									<NavLink to="/about-us">About Us</NavLink>
 								</li>
 								<li>
-									<NavLink to="/privacy-policy">Careers</NavLink>
+									<NavLink to="/careers">Careers</NavLink>
 								</li>
 								<li>
-									<NavLink to="/404">Terms & Conditions</NavLink>
+									<NavLink to="/terms-conditions">Terms & Conditions</NavLink>
 								</li>
 								<li>
-									<NavLink to="/404">Privacy Policy</NavLink>
+									<NavLink to="/privacy-policy">Privacy Policy</NavLink>
 								</li>
 							</ul>
 						</div>

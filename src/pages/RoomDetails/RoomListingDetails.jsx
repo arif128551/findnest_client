@@ -9,6 +9,7 @@ import { FiMapPin } from "react-icons/fi";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const RoomListingDetails = () => {
 	const { user } = use(AuthContext);
@@ -40,15 +41,14 @@ const RoomListingDetails = () => {
 		try {
 			const token = await user.getIdToken();
 
-			const res = await fetch(`https://b11a10-findnest-server.vercel.app/api/roommates/${_id}/like`, {
-				method: "PATCH",
+			const res = await axios.patch(`${import.meta.env.VITE_apiUrl}/roommates/${_id}/like`, null, {
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${token}`,
 				},
 			});
 
-			const data = await res.json();
+			const data = res.data;
 
 			if (data.success) {
 				setListingItem((prev) => ({

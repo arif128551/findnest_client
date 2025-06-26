@@ -17,6 +17,45 @@ const Navbar = ({ setTheme, theme }) => {
 				toast(error);
 			});
 	};
+
+	const navItems = (
+		<>
+			<li>
+				<NavLink to="/" className="hover:text-black">
+					Home
+				</NavLink>
+			</li>
+			<li>
+				<NavLink to="/browse-listing">Browse Listing</NavLink>
+			</li>
+			<li>
+				<NavLink to="/about-us">About Us</NavLink>
+			</li>
+			<li>
+				<NavLink to="/contact">Contact</NavLink>
+			</li>
+			<li>
+				<NavLink to="/faq">FAQs</NavLink>
+			</li>
+			{user ? (
+				<>
+					<li className="sm:hidden">
+						<button onClick={handleLogout}>Logout</button>
+					</li>
+				</>
+			) : (
+				<>
+					<li className="sm:hidden">
+						<NavLink to="/login">Login</NavLink>
+					</li>
+					<li className="sm:hidden">
+						<NavLink to="/register">Register</NavLink>
+					</li>
+				</>
+			)}
+		</>
+	);
+
 	return (
 		<div className="bg-base-200">
 			<div className="navbar container max-w-7xl mx-auto py-4 items-center flex">
@@ -38,37 +77,7 @@ const Navbar = ({ setTheme, theme }) => {
 							tabIndex={0}
 							className="menu  dropdown-content bg-base-100 text-base rounded-box z-1 mt-3 w-52 p-2 shadow"
 						>
-							<li>
-								<NavLink to="/">Home</NavLink>
-							</li>
-							<li>
-								<NavLink to="/add-find-roommate">Add Find Roommate</NavLink>
-							</li>
-							<li>
-								<NavLink to="/browse-listing">Browse Listing</NavLink>
-							</li>
-							<li>
-								<NavLink to="/my-listings">My Listings</NavLink>
-							</li>
-							{user ? (
-								<div className="flex items-center gap-4">
-									<button
-										onClick={handleLogout}
-										className="text-xs sm:text-sm transition text-white bg-primary hover:bg-primary hover:text-white font-semibold py-1.5 px-5 rounded-lg cursor-pointer max-w-40 my-2 ml-3"
-									>
-										Logout
-									</button>
-								</div>
-							) : (
-								<>
-									<li className="block sm:hidden">
-										<NavLink to="/login">Login</NavLink>
-									</li>
-									<li className="block sm:hidden">
-										<NavLink to="/signup">Signup</NavLink>
-									</li>
-								</>
-							)}
+							{navItems}
 						</ul>
 					</div>
 					<Link to="/">
@@ -76,20 +85,7 @@ const Navbar = ({ setTheme, theme }) => {
 					</Link>
 				</div>
 				<div className="navbar-center hidden lg:flex">
-					<ul className="menu-horizontal text-base font-medium text-primary flex flex-wrap w-fit gap-10">
-						<li>
-							<NavLink to="/">Home</NavLink>
-						</li>
-						<li>
-							<NavLink to="/add-find-roommate">Add Listing</NavLink>
-						</li>
-						<li>
-							<NavLink to="/browse-listing">Browse Listing</NavLink>
-						</li>
-						<li>
-							<NavLink to="/my-listings">My Listings</NavLink>
-						</li>
-					</ul>
+					<ul className="menu-horizontal text-base font-medium text-primary flex flex-wrap w-fit gap-10">{navItems}</ul>
 				</div>
 				<div className="navbar-end gap-3">
 					<ThemeToggle setTheme={setTheme} theme={theme} />

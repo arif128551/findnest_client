@@ -24,6 +24,7 @@ import Dashboard from "../pages/dashboard/Dashboard/Dashboard";
 import AllListings from "../pages/dashboard/AllListings/AllListings";
 import AddListing from "../pages/dashboard/AddListing/AddListing";
 import DashboardMyListings from "../pages/dashboard/MyListings/DashboardMyListings";
+import axios from "axios";
 
 export const router = createBrowserRouter([
 	{
@@ -34,13 +35,13 @@ export const router = createBrowserRouter([
 			{
 				index: true,
 				Component: Home,
-				loader: () => fetch("https://b11a10-findnest-server.vercel.app/api/roommates/available"),
+				loader: () => axios.get(`${import.meta.env.VITE_apiUrl}/roommates/available`).then((res) => res.data),
 				hydrateFallbackElement: <PageLoader />,
 			},
 			{
 				path: "/browse-listing",
 				Component: BrowseListing,
-				loader: () => fetch("https://b11a10-findnest-server.vercel.app/api/roommates/"),
+				loader: () => axios.get(`${import.meta.env.VITE_apiUrl}/roommates/`).then((res) => res.data),
 				hydrateFallbackElement: <PageLoader />,
 			},
 			{
@@ -50,25 +51,26 @@ export const router = createBrowserRouter([
 						<RoomListingDetails></RoomListingDetails>
 					</PrivateRoute>
 				),
-				loader: ({ params }) => fetch(`https://b11a10-findnest-server.vercel.app/api/roommates/${params.id}`),
+				loader: ({ params }) =>
+					axios.get(`${import.meta.env.VITE_apiUrl}/roommates/${params.id}`).then((res) => res.data),
 				hydrateFallbackElement: <PageLoader />,
 			},
-			{
-				path: "/my-listings",
-				element: (
-					<PrivateRoute>
-						<MyListings></MyListings>
-					</PrivateRoute>
-				),
-			},
-			{
-				path: "/add-find-roommate",
-				element: (
-					<PrivateRoute>
-						<AddFindRoommate></AddFindRoommate>
-					</PrivateRoute>
-				),
-			},
+			// {
+			// 	path: "/my-listings",
+			// 	element: (
+			// 		<PrivateRoute>
+			// 			<MyListings></MyListings>
+			// 		</PrivateRoute>
+			// 	),
+			// },
+			// {
+			// 	path: "/add-find-roommate",
+			// 	element: (
+			// 		<PrivateRoute>
+			// 			<AddFindRoommate></AddFindRoommate>
+			// 		</PrivateRoute>
+			// 	),
+			// },
 			{
 				path: "/contact",
 				Component: Contact,
@@ -138,7 +140,7 @@ export const router = createBrowserRouter([
 						<AllListings></AllListings>
 					</PrivateRoute>
 				),
-				loader: () => fetch("https://b11a10-findnest-server.vercel.app/api/roommates/"),
+				loader: () => axios.get(`${import.meta.env.VITE_apiUrl}/roommates/`).then((res) => res.data),
 				hydrateFallbackElement: <PageLoader />,
 			},
 			{

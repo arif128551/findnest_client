@@ -4,6 +4,7 @@ import MyListingsCard from "./MyListingsCard";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import PageLoader from "../../components/ui/PageLoader";
+import axios from "axios";
 
 const lifestylePreferencesItems = [
 	"Pet Friendly",
@@ -45,12 +46,12 @@ const MyListings = () => {
 
 			try {
 				const token = await user.getIdToken();
-				const res = await fetch("https://b11a10-findnest-server.vercel.app/api/my-roommates", {
+				const res = await axios.get(`${import.meta.env.VITE_apiUrl}/my-roommates`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
 				});
-				const data = await res.json();
+				const data = res.data;
 				setMyListings(data);
 			} catch (err) {
 				toast.error("Fetch failed:", err);
@@ -80,15 +81,14 @@ const MyListings = () => {
 				const remainingMyListings = myListing.filter((listing) => listing._id !== id);
 				setMyListings(remainingMyListings);
 
-				fetch(`https://b11a10-findnest-server.vercel.app/api/my-roommates/${id}`, {
-					method: "DELETE",
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				})
-					.then((res) => res.json())
-					.then((data) => {
-						if (data.deletedCount > 0) {
+				axios
+					.delete(`${import.meta.env.VITE_apiUrl}/my-roommates/${id}`, {
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					})
+					.then((res) => {
+						if (res.data.deletedCount > 0) {
 							Swal.fire({
 								title: "Deleted!",
 								text: "Listing deleted successfully",
@@ -98,9 +98,17 @@ const MyListings = () => {
 							Swal.fire({
 								title: "Deleted!",
 								text: "Failed to delete listing",
-								icon: "success",
+								icon: "error",
 							});
 						}
+					})
+					.catch((error) => {
+						console.error(error);
+						Swal.fire({
+							title: "Error!",
+							text: "Something went wrong",
+							icon: "error",
+						});
 					});
 			}
 		});
@@ -153,16 +161,14 @@ const MyListings = () => {
 		try {
 			const token = await user.getIdToken();
 
-			const response = await fetch(`https://b11a10-findnest-server.vercel.app/api/my-roommates/${updateItem._id}`, {
-				method: "PUT",
+			const response = await axios.put(`${import.meta.env.VITE_apiUrl}/my-roommates/${updateItem._id}`, updatedData, {
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${token}`,
 				},
-				body: JSON.stringify(updatedData),
 			});
 
-			const result = await response.json();
+			const result = response.data;
 
 			if (result.modifiedCount > 0) {
 				toast.success("Listing updated successfully.");

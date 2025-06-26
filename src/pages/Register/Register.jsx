@@ -4,13 +4,15 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import signupImg from "../../assets/signup-findnest.jpg";
+import axios from "axios";
 
 const Register = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const { createUser, setUser, updateUser, googleSignIn, setLoading } = use(AuthContext);
 	const navigate = useNavigate();
-	const handleRegister = (e) => {
+	const handleRegister = async (e) => {
 		e.preventDefault();
+
 		const displayName = e.target.name.value;
 		const photoURL = e.target.photo.value;
 		const email = e.target.email.value;
@@ -31,6 +33,7 @@ const Register = () => {
 			toast.error("Please enter a valid email address!");
 			return;
 		}
+
 		if (password.length < 6) {
 			toast.error("Password must be at least 6 characters long.");
 			return;
@@ -46,43 +49,58 @@ const Register = () => {
 			return;
 		}
 
-		createUser(email, password)
-			.then((userCredential) => {
-				const user = userCredential.user;
-				updateUser({ displayName, photoURL })
-					.then(() => {
-						setUser({ ...user, displayName, photoURL });
-					})
-					.catch((error) => {
-						toast.error(error);
-						setUser(user);
-					});
+		setLoading(true);
+		try {
+			const userCredential = await createUser(email, password);
+			const user = userCredential.user;
 
-				toast.success("Registration successful!");
-				navigate("/");
-			})
-			.catch(() => {
-				toast.error("Registration failed. Please provide valid information.");
-			})
-			.finally(() => setLoading(false));
+			await updateUser({ displayName, photoURL });
+			setUser({ ...user, displayName, photoURL });
+
+			const userProfile = {
+				displayName,
+				photoURL,
+				email,
+				creationTime: user.metadata?.creationTime,
+				lastSignInTime: user.metadata?.lastSignInTime,
+			};
+
+			await axios.post(`${import.meta.env.VITE_apiUrl}/users`, userProfile);
+
+			toast.success("Registration successful!");
+			navigate("/");
+		} catch (error) {
+			toast.error(error.message || "Registration failed. Please provide valid information.");
+		} finally {
+			setLoading(false);
+		}
 	};
 
-	const handleGoogleBtnLogin = () => {
-		googleSignIn()
-			.then((result) => {
-				const user = result.user;
-				const { creationTime, lastSignInTime } = user.metadata;
-				if (creationTime === lastSignInTime) {
-					toast.success("Account created successfully with Google! You're now logged in.");
-				} else {
-					toast.success("Welcome back! You've logged in with Google.");
-				}
-				navigate("/");
-			})
-			.catch((error) => {
-				const errorMessage = error.message;
-				toast.error(errorMessage);
+	const handleGoogleBtnLogin = async () => {
+		try {
+			const result = await googleSignIn();
+			const user = result.user;
+			const { creationTime, lastSignInTime } = user.metadata;
+
+			const response = await axios.post(`${import.meta.env.VITE_apiUrl}/users`, {
+				email: user.email,
+				displayName: user.displayName,
+				photoURL: user.photoURL,
+				creationTime,
+				lastSignInTime,
 			});
+
+			const data = response.data;
+
+			if (data.status === "new") {
+				toast.success("Account created successfully with Google!");
+			} else {
+				toast.success("Welcome back! You've logged in with Google.");
+			}
+			navigate("/");
+		} catch (error) {
+			toast.error(error.message || "Google login failed.");
+		}
 	};
 
 	useEffect(() => {

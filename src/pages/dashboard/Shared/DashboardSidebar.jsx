@@ -19,6 +19,9 @@ const DashboardSidebar = () => {
 						<NavLink rel="noopener noreferrer" to="/dashboard/my-listings">
 							My Listings
 						</NavLink>
+						<NavLink rel="noopener noreferrer" to="/">
+							Visit Site
+						</NavLink>
 					</div>
 				</div>
 			</nav>

@@ -1,6 +1,7 @@
 import React, { use, useEffect } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
+import axios from "axios";
 const lifestylePreferencesItems = [
 	"Pet Friendly",
 	"No Smoking",
@@ -51,22 +52,25 @@ const AddListing = () => {
 		const formEntries = Object.fromEntries(formData.entries());
 
 		formEntries.lifestylePreferences = selectedPreferences;
+		formEntries.createdAt = new Date();
 
-		fetch("https://b11a10-findnest-server.vercel.app/api/roommates", {
-			method: "POST",
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify(formEntries),
-		})
-			.then((res) => res.json())
-			.then((result) => {
-				if (result.insertedId) {
+		axios
+			.post(`${import.meta.env.VITE_apiUrl}/roommates`, formEntries, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+			.then((res) => {
+				if (res.data.insertedId) {
 					toast.success("Your roommate listing has been added successfully!");
 					form.reset();
 				} else {
 					toast.error("An error occurred. Please try again.");
 				}
+			})
+			.catch((error) => {
+				console.error(error);
+				toast.error("Something went wrong. Please try again.");
 			});
 	};
 
