@@ -39,6 +39,9 @@ const Navbar = ({ setTheme, theme }) => {
 			</li>
 			{user ? (
 				<>
+					<li>
+						<Link to="/dashboard">Dashboard</Link>
+					</li>
 					<li className="sm:hidden">
 						<button onClick={handleLogout}>Logout</button>
 					</li>

@@ -12,7 +12,7 @@ const Dashboard = () => {
 		document.title = "Dashboard | FindNest";
 	}, []);
 	return (
-		<div className="sm:py-10">
+		<div className="">
 			<div className="">
 				<div className="mb-6 flex sm:justify-between sm:items-center gap-6 flex-col sm:flex-row">
 					<div>
