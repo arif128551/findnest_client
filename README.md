@@ -5,8 +5,8 @@
 **Server URL:** [https://b11a10-findnest-server.vercel.app/](https://b11a10-findnest-server.vercel.app/)
 
 ## GitHub Repositories
-- **Client:** [FindNest Client](https://github.com/arif128551/findnest_client)
-- **Server:** [FindNest Server](https://github.com/arif128551/findnest_serverside)
+- **Client:** [FindNest Client](https://github.com/arifuddincoder/findnest_client)
+- **Server:** [FindNest Server](https://github.com/arifuddincoder/findnest_serverside)
 
 ## 🧪 How to Run Locally
 
@@ -15,7 +15,7 @@ To run the project locally on your machine, follow these steps carefully:
 ### 🚀 1. Clone & Run the Client
 
 ```bash
-git clone https://github.com/arif128551/findnest_client.git
+git clone https://github.com/arifuddincoder/findnest_client.git
 cd findnest_client
 npm install
 npm run dev
@@ -24,7 +24,7 @@ npm run dev
 ### 🛠️ 2. Clone & Run the Server
 
 ```bash
-git clone https://github.com/arif128551/findnest_serverside.git
+git clone https://github.com/arifuddincoder/findnest_serverside.git
 cd findnest_serverside
 npm install
 npm run dev
