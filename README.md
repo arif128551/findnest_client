@@ -212,6 +212,6 @@ Design inspiration taken from platforms like ThemeForest, adapted with unique cu
 ## 👨‍💻 Developer Info
 **Md Arif Uddin**  
 📧 arifuddincoder@gmail.com  
-🎓 Assignment Project for Programming Hero - Assignment 10
+<!-- 🎓 Assignment Project for Programming Hero - Assignment 10 -->
 
 Thanks for visiting **FindNest** 🏡
